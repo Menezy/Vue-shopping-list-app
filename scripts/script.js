@@ -12,7 +12,7 @@
             },
             template: 
                 ' <ul>' +
-                ' <li v-for="item in items">' +
+                ' <li v-for="item in items" :class="{ \'removed\': item.checked }">' +
                 ' <div class="checkbox">' +
                 ' <label>' +
                 ' <input type="checkbox" v-model="item.checked"> {{ item.text }}' +
@@ -55,6 +55,10 @@
                 '</span>' +
                 '</div>'
              });
+
+             Vue.directive('square', function(el, binding) {
+                 el.innerHTML = Math.pow(binding.value, 2);
+             });
         /**
             Registering components
 
@@ -64,7 +68,8 @@
         Vue.component('add-item-component', AddItemComponent);
         //Instantiating a vue instance
 
+
         new Vue({
             el: '#app',
-            data: data
-        });
+            data: data,
+        })
